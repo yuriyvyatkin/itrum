@@ -1,0 +1,41 @@
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+
+    // получим номера в виде строк
+    let firstNumber = '';
+    let secondNumber = '';
+    do {
+       firstNumber = l1.val + firstNumber;
+       l1 = l1.next;
+    } while (l1 !== null)
+    do {
+       secondNumber = l2.val + secondNumber;
+       l2 = l2.next;
+    } while (l2 !== null)
+
+    // сложим числа в зависимости от их безопасности
+    let sum;
+    if (Number.isSafeInteger(firstNumber) && Number.isSafeInteger(secondNumber)) {
+        sum = Number(firstNumber) + Number(secondNumber);
+    } else {
+        sum = BigInt(firstNumber) + BigInt(secondNumber);
+    }
+
+    // получим результирующий список
+    const nodes = String(sum).split('');
+    const nodesLength = nodes.length;
+    let nodesList = new ListNode(nodes[0], null);
+    for (let i = 1; i < nodesLength; i++) {
+        nodesList = new ListNode(nodes[i], nodesList);
+    }
+    return nodesList;
+};

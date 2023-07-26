@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таск трекер</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="tasks" id="tasks">
+    <h3 class="header">Корзина:</h3>
+    <div class="tasks__list" id="deleted-tasks">
+      <p class="warning">В корзине нет задач</p>
+    </div>
+    <h3 class="header">Все задачи:</h3>
+    <div class="tasks__list" id="all-tasks">
+    </div>
+  </div>
+  <form class="tasks__form" id="tasks__form">
+    <input type="text" class="tasks__input" id="tasks__input" autocomplete="off">
+    <button type="submit" class="tasks__add-btn" id="tasks__add-btn">Создать</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
