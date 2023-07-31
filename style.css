@@ -52,7 +52,7 @@ body {
   text-decoration: line-through;
 }
 
-.task_completed .task__complete-control {
+.task_completed .task__completion-control {
   background-color: green;
 }
 
@@ -70,7 +70,7 @@ body {
   text-decoration: line-through;
 }
 
-.task__complete-control {
+.task__completion-control {
   display: flex;
   justify-content: center;
   align-items: center;

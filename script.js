@@ -34,7 +34,7 @@ function getTodosHTML() {
           <div class="task__title">
             ${todo.content}
           </div>
-          <a href="#" class="task__complete-control"></a>
+          <a href="#" class="task__completion-control"></a>
           <a href="#" class="task__deletion-control"></a>
         </div>
       `
@@ -76,12 +76,12 @@ tasksForm.addEventListener('submit', (event) => {
     taskInput.value = '';
 
     target.insertAdjacentHTML(
-      'afterend',
+      'beforeend',
       '<p class="error">Ошибка: Пустое значение!</p>'
     );
 
     setTimeout(() => {
-      const errorElement = document.querySelector('.error');
+      const errorElement = tasksForm.querySelector('.error');
 
       if (errorElement) {
         errorElement.remove();
@@ -93,7 +93,7 @@ tasksForm.addEventListener('submit', (event) => {
   handleInput();
 })
 
-taskInput.addEventListener('keyup', (event) => {
+taskInput.addEventListener('keyup', () => {
   if (tasksForm.lastElementChild.className === 'error') {
     tasksForm.lastElementChild.remove();
   }
@@ -102,16 +102,14 @@ taskInput.addEventListener('keyup', (event) => {
 tasks.addEventListener('click', (event) => {
   const { target } = event;
 
-  console.log(target);
-
-  if (target.classList.contains('task__complete-control')) {
+  if (target.classList.contains('task__completion-control')) {
     target.parentElement.classList.toggle('task_completed');
   } else if (target.classList.contains('task__deletion-control')) {
-    const relatedID = +target.parentElement.id.split('#')[1];
+    const task = target.parentElement;
+    const relatedID = +task.id.split('#')[1];
     const relatedTodo = todos.find((todo) => {
       return todo.id === relatedID;
     });
-    const task = target.parentElement;
 
     if (task.classList.contains('task_deleted')) {
       relatedTodo.deleted = false;
@@ -119,7 +117,6 @@ tasks.addEventListener('click', (event) => {
       relatedTodo.deleted = true;
     }
 
-    task.classList.toggle('task_deleted');
     renderTasks(getTodosHTML());
   }
 })
